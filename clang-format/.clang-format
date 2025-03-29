@@ -72,3 +72,6 @@ ForEachMacros: [rep, erp]
 
 # 标记 `typename` 相关的自定义宏，保证 `clang-format` 能正确解析它们
 TypenameMacros: [i64, pii, pll]
+
+# 声明template后换行
+BreakTemplateDeclarations: Yes
