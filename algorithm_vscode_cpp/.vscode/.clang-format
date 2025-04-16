@@ -1,0 +1,77 @@
+# 参考文档
+# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+
+# 代码最大宽度限制，超过该宽度的代码会自动换行
+ColumnLimit: 100
+
+# 不使用 Tab 进行缩进，统一使用空格
+UseTab: Never
+
+# 代码缩进的空格数量（默认 4 个空格）
+IndentWidth: 4
+
+# 函数参数或模板参数的换行对齐方式
+# - `Align`: 使参数对齐到括号的第一个字符之后
+# - `DontAlign`: 不对齐，直接换行
+AlignAfterOpenBracket: Align
+
+# 结构体数组对齐方式
+# - `Left`: 变量名称左对齐
+# - `Right`: 变量名称右对齐
+# - `None`: 不进行对齐
+AlignArrayOfStructures: Right
+
+# 操作符对齐方式，如 `+`、`-`、`*` 等
+# - `Align`: 使操作符对齐（推荐）
+# - `DontAlign`: 不对齐
+AlignOperands: Align
+
+# 是否允许 `{}` 包裹的代码块写在单行
+# - `Never`: 永远不允许
+# - `Empty`: 仅当 `{}` 为空时允许
+# - `Always`: 总是允许
+AllowShortBlocksOnASingleLine: Never
+
+# 是否允许短函数写在单行
+# - `None`: 不允许
+# - `Inline`: 仅允许 `inline` 函数写在单行
+# - `Empty`: 仅允许空函数写在单行
+# - `All`: 允许所有短函数写在单行
+AllowShortFunctionsOnASingleLine: None
+
+# 是否允许 `if` 语句写在单行
+# - `Never`: 不允许
+# - `WithoutElse`: 仅当 `if` 语句没有 `else` 时允许
+# - `Always`: 允许所有 `if` 语句写在单行
+AllowShortIfStatementsOnASingleLine: Never
+
+# 是否允许 Lambda 表达式写在单行
+# - `None`: 不允许
+# - `Empty`: 仅允许空 Lambda 写在单行
+# - `Inline`: 仅允许 `inline` Lambda 写在单行
+# - `All`: 允许所有 Lambda 写在单行
+AllowShortLambdasOnASingleLine: None
+
+# 是否允许 `for`、`while`、`do-while` 语句块写在单行
+# - `false`: 不允许
+# - `true`: 允许
+AllowShortLoopsOnASingleLine: false
+
+# 花括号 `{}` 里面的初始化列表缩进宽度
+# 例如：
+# ```cpp
+# int arr[] = {
+#   1, 2, 3
+# };
+# ```
+# 这里 `{}` 内部的 `1, 2, 3` 的缩进就是 `BracedInitializerIndentWidth`
+BracedInitializerIndentWidth: 4
+
+# 标记 `for-each` 相关的自定义宏，保证 `clang-format` 能正确解析它们
+ForEachMacros: [rep, erp]
+
+# 标记 `typename` 相关的自定义宏，保证 `clang-format` 能正确解析它们
+TypenameMacros: [i64, pii, pll]
+
+# 声明template后换行
+BreakTemplateDeclarations: Yes
