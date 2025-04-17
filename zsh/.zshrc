@@ -11,7 +11,7 @@ SAVEHIST=1000
 
 alias ll='ls --color=auto -lah'
 
-bindkey '^a' autosuggest-accept
+bindkey '\eq' autosuggest-accept
 
 PROMPT='%F{blue}%n@%m%f %F{green}%~%f %# '
 
