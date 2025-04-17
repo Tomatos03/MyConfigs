@@ -1,0 +1,368 @@
+{
+    "Quick Power Function": {
+        "prefix": "qpow",
+        "body": [
+            "i64 qpow(i64 a, i64 b, i64 mod) {",
+            "    i64 c = 1;",
+            "    while (b) {",
+            "        if (b & 1) c = c * a % mod;",
+            "        a = a * a % mod;",
+            "        b >>= 1;",
+            "    }",
+            "    return c;",
+            "}"
+        ],
+        "description": "Quick Power function with modulus"
+    },
+    "GCD Function": {
+        "prefix": "gcd",
+        "body": [
+            "i64 gcd(i64 a, i64 b) {",
+            "    while (b) {",
+            "        i64 r = a % b;",
+            "        a = b;",
+            "        b = r;",
+            "    }",
+            "    return a;",
+            "}"
+        ],
+        "description": "Greatest Common Divisor function"
+    },
+    "lcm function": {
+        "prefix": "lcm",
+        "body": [
+            "i64 lcm(i64 a, i64 b) {",
+            "    return a / gcd(a, b) * b;",
+            "}"
+        ],
+        "description": "Calculates the least common multiple (LCM) of two numbers."
+    },
+    "init1": {
+        "prefix": "solve",
+        "body": [
+            "#include <bits/stdc++.h>",
+            "using namespace std;",
+            "",
+            "#define endl '\\n'",
+            "#define rep(i, a, b) for (int i = a; i <= b; ++i)",
+            "#define erp(i, a, b) for (int i = a; i >= b; --i)",
+            "",
+            "using i64 = long long;",
+            "using pii = pair<int, int>;",
+            "using pll = pair<i64, i64>;",
+            "",
+            "const int mod = 1000000007, mod0 = 998244353;",
+            "",
+            "void solve() {",
+            "\t${1}",
+            "}",
+            "",
+            "int main() {",
+            "    ios::sync_with_stdio(0);",
+            "    cin.tie(0);",
+            "    cout.tie(0);",
+            "    solve();",
+            "    return 0;",
+            "}"
+        ],
+        "description": "单个测试案例"
+    },
+    "init0": {
+        "prefix": "solvet",
+        "body": [
+            "#include <bits/stdc++.h>",
+            "using namespace std;",
+            "",
+            "#define endl '\\n'",
+            "#define rep(i, a, b) for (int i = a; i <= b; ++i)",
+            "#define erp(i, a, b) for (int i = a; i >= b; --i)",
+            "",
+            "using i64 = long long;",
+            "using pii = pair<int, int>;",
+            "using pll = pair<i64, i64>;",
+            "",
+            "const int mod = 1000000007, mod0 = 998244353;",
+            "",
+            "void solve() {",
+            "\t${1}",
+            "}",
+            "",
+            "int main() {",
+            "    ios::sync_with_stdio(0);",
+            "    cin.tie(0);",
+            "    cout.tie(0);",
+            "    int t;",
+            "    cin >> t;",
+            "    while (t-- > 0)",
+            "        solve();",
+            "    return 0;",
+            "}"
+        ],
+        "description": "多个测试案例"
+    },
+    "inf": {
+        "prefix": "inf",
+        "body": [
+            "INT_MAX"
+        ],
+        "description": "int max"
+    },
+    "-inf": {
+        "prefix": "-inf",
+        "body": [
+            "INT_MIN"
+        ],
+        "description": "int max"
+    },
+    "linf": {
+        "prefix": "linf",
+        "body": [
+            "LLONG_MAX"
+        ],
+        "description": "i64 max"
+    },
+    "-linf": {
+        "prefix": "-linf",
+        "body": [
+            "LLONG_MIN"
+        ],
+        "description": "i64 min"
+    },
+    "cout": {
+        "prefix": "cout",
+        "body": [
+            "cout << ${1} << endl;"
+        ],
+        "description": "cout输出内容并换行"
+    },
+    "8pos": {
+        "prefix": "8pos",
+        "body": [
+            "int dx[] = {0, 0, -1, 1, 1, 1, -1, -1}, dy[] = {1, -1, 0, 0, 1, -1, 1, -1};"
+        ],
+        "description": "方格8个相邻位置"
+    },
+    "4pos": {
+        "prefix": "4pos",
+        "body": [
+            "int dx[] = {0, 0, -1, 1}, dy[] = {1, -1, 0, 0};"
+        ],
+        "description": "方格4个相邻位置"
+    },
+    "KMP function": {
+        "prefix": "kmp",
+        "body": [
+            "int kmp(string s, string t) {",
+            "    int n = t.size(), m = s.size();",
+            "    if (m < n)",
+            "        return -1;",
+            "    int next[n];",
+            "    next[0] = 0;",
+            "    for (int i = 1, j = 0; i < n; ++i) {",
+            "        next[i] = j;",
+            "        while (j && t[j] != t[i])",
+            "            j = next[j];",
+            "        j += t[j] == t[i];",
+            "    }",
+            "    for (int i = 0, j = 0; i < m; ++i) {",
+            "        while (j && t[j] != s[i])",
+            "            j = next[j];",
+            "        if (s[i] == t[j]) {",
+            "            ++j;",
+            "            if (j == n)",
+            "                return i - n + 1;",
+            "        }",
+            "    }",
+            "    return -1;",
+            "}"
+        ],
+        "description": "Knuth-Morris-Pratt (KMP) string matching algorithm."
+    },
+    "Eratosthenes Sieve": {
+        "prefix": "eratosthenes",
+        "body": [
+            "vector<bool> eratosthenes(int mx_v) {",
+            "    vector<bool> is_prime(mx_v + 1, true);",
+            "    is_prime[0] = is_prime[1] = false;",
+            "",
+            "    for (int i = 2; i * i <= mx_v; ++i) {",
+            "        if (!is_prime[i])",
+            "            continue;",
+            "        for (int j = i * 2; j <= mx_v; j += i) {",
+            "            is_prime[j] = false;",
+            "        }",
+            "    }",
+            "    return is_prime;",
+            "}"
+        ],
+        "description": "Eratosthenes Sieve Algorithm to find prime numbers up to mx_v."
+    },
+    "Trie": {
+        "prefix": "trie",
+        "body": [
+            "struct Node {",
+            "    bool isEnd = false;",
+            "    Node *next[26]{};",
+            "};",
+            "",
+            "struct Trie {",
+            "    Node *root;",
+            "",
+            "    Trie() {",
+            "        root = new Node();",
+            "    }",
+            "",
+            "    void insert(const string &s) {",
+            "        Node *it = root;",
+            "        for (char c : s) {",
+            "            int id = c - 'a';",
+            "            if (it->next[id] == nullptr)",
+            "                it->next[id] = new Node();",
+            "            it = it->next[id];",
+            "        }",
+            "        it->isEnd = true;",
+            "    }",
+            "",
+            "    Node *find(const string &s) {",
+            "        Node *it = root;",
+            "        for (char c : s) {",
+            "            int id = c - 'a';",
+            "            if (it->next[id] == nullptr)",
+            "                return nullptr;",
+            "            it = it->next[id];",
+            "        }",
+            "        return it;",
+            "    }",
+            "",
+            "    bool search(const string &s) {",
+            "        Node *it = find(s);",
+            "        return it != nullptr && it->isEnd;",
+            "    }",
+            "",
+            "    bool startsWith(const string &s) {",
+            "        return find(s) != nullptr;",
+            "    }",
+            "",
+            "    string longestCommonPrefix() {",
+            "        Node *it = root;",
+            "        string com_str = \"\";",
+            "        while (true) {",
+            "            int cnt = 0, next_id = 0;",
+            "            for (int i = 0; i < 26; ++i) {",
+            "                if (it->next[i] == nullptr)",
+            "                    continue;",
+            "                ++cnt;",
+            "                next_id = i;",
+            "            }",
+            "            if (cnt != 1 || it->isEnd)",
+            "                break;",
+            "            com_str.push_back(char('a' + next_id));",
+            "            it = it->next[next_id];",
+            "        }",
+            "        return com_str;",
+            "    }",
+            "};"
+        ],
+        "description": "Trie data structure implementation"
+    },
+    "DSU Template": {
+        "prefix": "dsu",
+        "body": [
+            "template <typename T>",
+            "struct DSU {",
+            "    vector<T> pa, size;",
+            "    int cnt;",
+            "",
+            "    DSU(T _size) : pa(_size), size(_size, 1) {",
+            "        iota(pa.begin(), pa.end(), 0);",
+            "        cnt = _size;",
+            "    }",
+            "",
+            "    T find(T x) {",
+            "        return pa[x] == x ? x : pa[x] = find(pa[x]);",
+            "    }",
+            "",
+            "    void merge(T x, T y) {",
+            "        x = find(x), y = find(y);",
+            "        if (x == y) return;",
+            "        if (x > y) swap(x, y);",
+            "        --cnt;",
+            "        pa[y] = x;",
+            "        size[x] += size[y];",
+            "    }",
+            "",
+            "    bool is_connected(T x, T y) {",
+            "        return find(x) == find(y);",
+            "    }",
+            "};"
+        ],
+        "description": "A Disjoint Set Union (DSU) template with path compression."
+    },
+    "eulerSieve": {
+        "prefix": "eulerSieve",
+        "body": [
+            "#include <iostream>",
+            "#include <vector>",
+            "using namespace std;",
+            "",
+            "vector<int> eulerSieve(int mx_v) {",
+            "    vector<bool> is_prime(mx_v + 1, true);",
+            "    is_prime[0] = is_prime[1] = false;",
+            "",
+            "    vector<int> primes;",
+            "    for (int i = 2; i <= mx_v; ++i) {",
+            "        if (is_prime[i])",
+            "            primes.push_back(i);",
+            "        for (const int &prime : primes) {",
+            "            if (prime * i > mx_v)",
+            "                break;",
+            "            is_prime[prime * i] = false;",
+            "            if (i % prime)",
+            "                break;",
+            "        }",
+            "    }",
+            "    return primes;",
+            "}"
+        ],
+        "description": "Euler's Sieve for generating prime numbers",
+    },
+    "Fenwick Tree Template": {
+        "prefix": "fenwick",
+        "body": [
+            "template <typename T>",
+            "struct FenwickTree {",
+            "    vector<T> tree;",
+            "",
+            "    FenwickTree(int n) : tree(n + 1) {}",
+            "",
+            "    int lowbit(int x) const {",
+            "        return x & -x;",
+            "    }",
+            "",
+            "    void update(int i, T val) {",
+            "        int n = tree.size();",
+            "        while (i < n) {",
+            "            tree[i] += val;",
+            "            i += lowbit(i);",
+            "        }",
+            "    }",
+            "",
+            "    T pre(int i) {",
+            "        T res = 0;",
+            "        while (i) {",
+            "            res += tree[i];",
+            "            i ^= lowbit(i);",
+            "        }",
+            "        return res;",
+            "    }",
+            "",
+            "    T query(int l, int r) {",
+            "        if (r < l)",
+            "            return 0;",
+            "        return pre(r) - pre(l - 1);",
+            "    }",
+            "};"
+        ],
+        "description": "Fenwick Tree (Binary Indexed Tree) template for C++"
+    }
+}
