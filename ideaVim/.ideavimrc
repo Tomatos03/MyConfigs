@@ -1,70 +1,59 @@
-" .ideavimrc is a configuration file for IdeaVim plugin. It uses
-"   the same commands as the original .vimrc configuration.
-" You can find a list of commands here: https://jb.gg/h38q75
-" Find more examples here: https://jb.gg/share-ideavimrc
+" 基本设置
+set showmode
+set incsearch
+set nu
+set relativenumber
+set ignorecase
+set smartcase
+set clipboard+=unname
+set quickscope
 
-" My define key
-" 修改引导键
+" 设置引导键为空格
 let mapleader = " "
-" 修改插入模式进入普通模式的快捷键
-inoremap jk <esc>
+
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+"highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+"highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+
+
+" 插入模式下方向键映射
 inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
-" 重命名元素
-nnoremap <leader>re :action RenameElement<CR>
-" 重命名文件
-nnoremap <leader>rf :action RenameFile<CR>
-" 实现方法
-nnoremap <Leader>im :action ImplementMethods<CR>
-" 提取方法
-vnoremap <Leader>em :action ExtractMethod<CR>
 
-nnoremap <Leader>ga :action GotoAction<CR>
-nnoremap <Leader>db :action Debug<CR>
-nnoremap <Leader>gb :action JumpToLastChange<CR>
-nnoremap <Leader>gc :action GotoClass<CR>
-nnoremap <Leader>gd :action GotoDeclaration<CR>
-nnoremap <Leader>gs :action GotoSuperMethod<CR>
-" 跳转到实现
-nnoremap <Leader>gi :action GotoImplementation<CR>
-nnoremap <Leader>gf :action GotoFile<CR>
-nnoremap <Leader>gm :action GotoSymbol<CR>
-nnoremap <Leader>gu :action ShowUsages<CR>
-nnoremap <Leader>gt :action GotoTest<CR>
-nnoremap <Leader>gp :action FindInPath<CR>
-nnoremap <Leader>gr :action RecentFiles<CR>
-nnoremap <Leader>gh :action Back<CR>
-nnoremap <Leader>gl :action Forward<CR>
+" 系统剪贴板复制相关映射
+nnoremap y "+y      " 普通模式下复制到系统剪贴板
+nnoremap yy "+yy    " 普通模式下复制整行到系统剪贴板
+vnoremap y "+y      " 可视模式下复制到系统剪贴板
 
+" 常用IDE动作快捷键映射
+nnoremap <leader>re :action RenameElement<CR>      " 重命名元素
+nnoremap <leader>rf :action RenameFile<CR>         " 重命名文件
+nnoremap <Leader>im :action ImplementMethods<CR>   " 实现方法
+vnoremap <Leader>em :action ExtractMethod<CR>      " 提取方法
 
-"" -- Suggested options --
-" Show a few lines of context around the cursor. Note that this makes the
-" text scroll if you mouse-click near the start or end of the window.
-set relativenumber
+nnoremap <Leader>ga :action GotoAction<CR>         " 跳转到动作
+nnoremap <Leader>db :action Debug<CR>              " 调试
+nnoremap <Leader>gb :action JumpToLastChange<CR>   " 跳转到上次更改
+nnoremap <Leader>gc :action GotoClass<CR>          " 跳转到类
+nnoremap <Leader>gd :action GotoDeclaration<CR>    " 跳转到声明
+nnoremap <Leader>gs :action GotoSuperMethod<CR>    " 跳转到父方法
+nnoremap <Leader>gi :action GotoImplementation<CR> " 跳转到实现
+nnoremap <Leader>gf :action GotoFile<CR>           " 跳转到文件
+nnoremap <Leader>gm :action GotoSymbol<CR>         " 跳转到符号
+nnoremap <Leader>gu :action ShowUsages<CR>         " 显示用法
+nnoremap <Leader>gt :action GotoTest<CR>           " 跳转到测试
+nnoremap <Leader>gp :action FindIndPath<CR>         " 路径内查找
+nnoremap <Leader>gr :action RecentFiles<CR>        " 最近文件
+nnoremap <Leader>gh :action Back<CR>               " 后退
+nnoremap <Leader>gl :action Forward<CR>            " 前进
+nnoremap <leader>d :action QuickJavaDoc<CR>
 
 
-" Do incremental searching.
-set incsearch
-
-" Don't use Ex mode, use Q for formatting.
-map Q gq
-
-" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
-
-" Highlight copied text
-Plug 'machakann/vim-highlightedyank'
-" Commentary plugin
-Plug 'tpope/vim-commentary'
+" 插件配置
+Plug 'machakann/vim-highlightedyank'   " 高亮复制内容
+Plug 'tpope/vim-commentary'            " 注释插件
+Plug 'kana/vim-textobj-entire'
 
 
-"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
-"" Map \r to the Reformat Code action
-"map \r <Action>(ReformatCode)
-
-"" Map <leader>d to start debug
-"map <leader>d <Action>(Debug)
-
-"" Map \b to toggle the breakpoint on the current line
-"map \b <Action>(ToggleLineBreakpoint)
