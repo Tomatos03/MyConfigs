@@ -298,6 +298,36 @@
         ],
         "description": "A Disjoint Set Union (DSU) template with path compression."
     },
+    "dijkstra function": {
+        "prefix": "dijkstra",
+        "body": [
+            "vector<int> dijkstra(int n, int source_node, vector<vector<pii>> &g) {",
+            "    vector<int> dis(n, inf);",
+            "    dis[source_node] = 0;",
+            "",
+            "    priority_queue<pii, vector<pii>, greater<pii>> pq;",
+            "    pq.push({0, source_node});",
+            "",
+            "    while (!pq.empty()) {",
+            "        auto [cur_dis, u] = pq.top();",
+            "        pq.pop();",
+            "",
+            "        if (cur_dis > dis[u])",
+            "            continue;",
+            "",
+            "        for (auto [v, w] : g[u]) {",
+            "            int new_dis = cur_dis + w;",
+            "            if (new_dis < dis[v]) {",
+            "                dis[v] = new_dis;",
+            "                pq.push({new_dis, v});",
+            "            }",
+            "        }",
+            "    }",
+            "    return dis;",
+            "}"
+        ],
+        "description": "Dijkstra shortest path algorithm"
+    },
     "eulerSieve": {
         "prefix": "eulerSieve",
         "body": [
@@ -324,7 +354,7 @@
             "    return primes;",
             "}"
         ],
-        "description": "Euler's Sieve for generating prime numbers",
+        "description": "Euler's Sieve for generating prime numbers"
     },
     "Fenwick Tree Template": {
         "prefix": "fenwick",
