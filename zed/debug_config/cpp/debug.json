@@ -1,0 +1,20 @@
+[
+  {
+    // 调试配置的标签，用于在调试面板和新会话弹窗中标识调试会话
+    "label": "cppDebuger",
+    // Zed 应该使用的调试适配器
+    "adapter": "GDB",
+    // 请求类型：
+    //  - launch: 如果指定了程序，Zed 会启动该程序，否则会显示带有正确配置的调试终端
+    //  - attach: Zed 会附加到正在运行的程序进行调试，如果未指定 process_id，则会显示进程选择器（目前仅支持 node）
+    "request": "launch",
+    // program: 你想要调试的程序
+    // 此字段支持 ~ 或 . 符号的路径解析
+    "program": "./output/$ZED_STEM",
+    // cwd: 默认为项目的当前工作目录（$ZED_WORKTREE_ROOT）
+    "cwd": "$ZED_WORKTREE_ROOT",
+    // 指定调试之前的任务
+    // 可以直接指定已经存在的任务名称, 或者直接书写
+    "build": "cppStarter"
+  }
+]

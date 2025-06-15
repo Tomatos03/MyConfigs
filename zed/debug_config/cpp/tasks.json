@@ -1,0 +1,17 @@
+[
+  {
+    "label": "cppStarter",
+    "command": "g++",
+    "args": [
+      "-std=c++17",
+      "-fdiagnostics-color=always",
+      "-g",
+      "$ZED_FILENAME",
+      "-o",
+      "./output/$ZED_STEM"
+    ],
+    "use_new_terminal": false,
+    "show_summary": false,
+    "show_command": false
+  }
+]
