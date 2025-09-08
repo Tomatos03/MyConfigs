@@ -7,6 +7,8 @@ set ignorecase
 set smartcase
 set clipboard+=unname
 set quickscope
+set smartcase
+     
 
 " 插件配置
 " 高亮复制内容

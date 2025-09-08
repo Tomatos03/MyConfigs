@@ -154,6 +154,8 @@ bindkey '^q' autosuggest-accept
 PROMPT='%F{blue}%n@%m%f %F{green}%~%f %# '
 
 export EDITOR='vim'
+# node17+使用不支持的加密算法, 需要添加此行
+export NODE_OPTIONS=--openssl-legacy-provider
 export PATH="$PATH:$HOME/go/bin"
 
 
