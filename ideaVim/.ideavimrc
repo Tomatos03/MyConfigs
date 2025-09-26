@@ -17,6 +17,8 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
 Plug 'kana/vim-textobj-entire'
 Plug 'preservim/nerdtree'
+Plug 'justinmk/vim-sneak'
+
 
 " 设置引导键为空格
 let mapleader = " "
