@@ -1,0 +1,17 @@
+{
+  "init Vue code template": {
+    "prefix": "init",
+    "body": [
+      "<template>",
+      "${1}",
+      "</template>",
+      "",
+      "<script setup>",
+      "</script>",
+      "",
+      "<style scoped>",
+      "</style>"
+    ],
+    "description": "Vue component template with setup and scoped script"
+  }
+}
