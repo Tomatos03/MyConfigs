@@ -8,6 +8,9 @@ set smartcase
 set clipboard+=unname
 set quickscope
 set smartcase
+" 下面的两个设置由IdeaVimExtension插件提供
+set keep-english-in-normal
+set nokeep-english-in-normal-and-restore-in-insert
      
 
 " 插件配置
@@ -18,7 +21,6 @@ Plug 'tpope/vim-commentary'
 Plug 'kana/vim-textobj-entire'
 Plug 'preservim/nerdtree'
 Plug 'justinmk/vim-sneak'
-
 
 " 设置引导键为空格
 let mapleader = " "
@@ -81,4 +83,5 @@ nnoremap <Leader>gr :action RecentFiles<CR>
 nnoremap <Leader>gh :action Back<CR>
 " 前进
 nnoremap <Leader>gl :action Forward<CR>
-nnoremap <leader>d :action QuickJavaDoc<CR>
+" 展示JavaDoc
+nnoremap <leader>qd :action QuickJavaDoc<CR>

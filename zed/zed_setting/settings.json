@@ -1,18 +1,15 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
 {
-  // ai相关
+  // ========================= AI相关 =========================
+  "auto_update": false,
+  "confirm_quit": false,
+  "agent_ui_font_size": 22,
+  "agent_buffer_font_size": 16,
   "disable_ai": false,
   "agent": {
+    "always_allow_tool_actions": true,
     "inline_assistant_model": {
       "provider": "copilot_chat",
-      "model": "gpt-4.1"
+      "model": "claude-haiku-4.5"
     },
     "default_profile": "ask",
     "dock": "right",
@@ -21,45 +18,81 @@
       "model": "gpt-4.1"
     }
   },
-  // 主题相关
+
+  // ========================= 杂项 =========================
+  "sticky_scroll": {
+    "enabled": true
+  },
+  "languages": {
+    "Vue.js": {
+      "preferred_line_length": 120
+    }
+  },
+  "title_bar": {
+    "show_branch_icon": true
+  },
+  "auto_indent": true,
   "autosave": "on_focus_change",
+  "restore_on_file_reopen": true,
+  "colorize_brackets": true,
+  "format_on_save": "off",
+  "preview_tabs": {
+    "enabled": false // 关闭后每次打开新文件创建一个新的tab
+  },
+
+  // ========================= 关闭匿名数据收集 =========================
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+
+  // ========================= 主题相关 =========================
   "theme": {
-    "mode": "system",
+    "mode": "dark",
     "light": "One Light",
     "dark": "Catppuccin Macchiato"
   },
   "icon_theme": "Material Icon Theme",
-  // vim 相关设置
+
+  // ========================= Vim相关设置 =========================
   "vim_mode": true,
-  "relative_line_numbers": true,
-  "use_smartcase_search": true,
-  // 字体相关
-  "ui_font_family": ".ZedMono",
-  "buffer_font_family": "Fira Code",
-  "ui_font_size": 18,
-  // 终端设置
-  "terminal": {
-    "font_family": "Fira Code",
-    "font_size": 16
+  "vim": {
+    "default_mode": "insert",
+    "use_system_clipboard": "always",
+    "use_smartcase_find": true,
+    "toggle_relative_line_numbers": true,
+    "highlight_on_yank_duration": 200
   },
-  // 代码编辑区设置
+
+  // ========================= 代码编辑区 =========================
   "buffer_font_size": 20,
-  // 小地图设置
-  "minimap": {
-    "show": "auto",
-    "display_in": "active_editor"
+  "buffer_font_family": "Fira Code",
+  "buffer_font_features": {
+    "calt": true, // 连字特性
+    "cv01": true, // 字母a
+    "cv02": true, // 字母g
+    "cv03": true, // 字母i
+    "cv07": true, // 字母l
+    "cv29": true, // 花括号
+    "cv30": true, // 符号|
+    "ss03": true, // 符号&
+    "ss05": true // 符号@
   },
-  "restore_on_file_reopen": true,
-  "format_on_save": "off",
+  "show_edit_predictions": true,
+  "edit_predictions": {
+    "mode": "subtle"
+  },
+  "features": {
+    "edit_prediction_provider": "copilot"
+  },
   "inlay_hints": {
     "enabled": true,
-    "show_type_hints": true,
+    "show_type_hints": false,
     "show_parameter_hints": true,
-    "show_other_hints": true,
+    "show_other_hints": false,
     "show_background": false,
     "edit_debounce_ms": 700,
-    "scroll_debounce_ms": 50,
-    "toggle_on_modifiers_press": null
+    "scroll_debounce_ms": 50
   },
   "diagnostics": {
     "button": true,
@@ -71,11 +104,55 @@
       "max_severity": "warning"
     }
   },
-  "show_edit_predictions": true,
-  "edit_predictions": {
-    "mode": "subtle"
+
+  // ========================= FileFinder全局文件搜索 =========================
+  "file_finder": {
+    "file_icons": true,
+    "skip_focus_for_active_in_search": true,
+    "modal_max_width": "medium"
   },
-  "features": {
-    "edit_prediction_provider": "copilot"
+
+  // ========================= UI界面 =========================
+  "ui_font_family": ".ZedMono",
+  "ui_font_size": 20,
+
+  // ========================= 终端相关 =========================
+  "terminal": {
+    "shell": "system",
+    "font_family": "Fira Code",
+    "font_size": 16
+  },
+
+  // ========================= 小地图设置 =========================
+  "minimap": {
+    "show": "auto",
+    "display_in": "active_editor"
+  },
+
+  // ========================= 主题自定义覆盖 =========================
+  "theme_overrides": {
+    "Catppuccin Macchiato": {
+      "vim.mode.text": "#494d64",
+      "vim.insert.background": "#a6da95",
+      "vim.normal.background": "#c6a0f6",
+      "vim.visual_line.background": "#8aadf4"
+    }
+  },
+
+  // ========================= 协作相关配置 =========================
+  "notification_panel": {
+    "button": false
+  },
+
+  // ========================= LSP相关 =========================
+  "lsp": {
+    "tailwindcss-language-server": {
+      "settings": {
+        "classFunctions": ["cva", "cx"],
+        "experimental": {
+          "classRegex": ["[cls|className]\\s\\:\\=\\s\"([^\"]*)"]
+        }
+      }
+    }
   }
 }
