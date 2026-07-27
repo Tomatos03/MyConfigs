@@ -5,173 +5,91 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Start configuration added by Zim install {{{
-#
-# User configuration sourced by interactive shells
-#
-
-# -----------------
-# Zsh configuration
-# -----------------
-
-#
-# History
-#
-
-# Remove older command from the history if a duplicate is to be added.
-setopt HIST_IGNORE_ALL_DUPS
-
-#
-# Input/output
-#
-
-# Set editor default keymap to emacs (`-e`) or vi (`-v`)
-bindkey -e
-
-# Prompt for spelling correction of commands.
-#setopt CORRECT
-
-# Customize spelling correction prompt.
-#SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
-
-# Remove path separator from WORDCHARS.
-WORDCHARS=${WORDCHARS//[\/]}
-
-# -----------------
-# Zim configuration
-# -----------------
-
-# Use degit instead of git as the default tool to install and update modules.
-#zstyle ':zim:zmodule' use 'degit'
-
-# --------------------
-# Module configuration
-# --------------------
-
-#
-# git
-#
-
-# Set a custom prefix for the generated aliases. The default prefix is 'G'.
-#zstyle ':zim:git' aliases-prefix 'g'
-
-#
-# input
-#
-
-# Append `../` to your input for each `.` you type after an initial `..`
-#zstyle ':zim:input' double-dot-expand yes
-
-#
-# termtitle
-#
-
-# Set a custom terminal title format using prompt expansion escape sequences.
-# See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Simple-Prompt-Escapes
-# If none is provided, the default '%n@%m: %~' is used.
-#zstyle ':zim:termtitle' format '%1~'
-
-#
-# zsh-autosuggestions
-#
-
-# Disable automatic widget re-binding on each precmd. This can be set when
-# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-
-# Customize the style that the suggestions are shown with.
-# See https://github.com/zsh-users/zsh-autosuggestions/blob/master/README.md#suggestion-highlight-style
-#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
-
-#
-# zsh-syntax-highlighting
-#
-
-# Set what highlighters will be used.
-# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-
-# Customize the main highlighter styles.
-# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
-#typeset -A ZSH_HIGHLIGHT_STYLES
-#ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
-
-# ------------------
-# Initialize modules
-# ------------------
-
-ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
-# Download zimfw plugin manager if missing.
-if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-  if (( ${+commands[curl]} )); then
-    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  else
-    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  fi
-fi
-# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
-if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
+# ============================================================
+# Zim Framework
+# ============================================================
+ZIM_HOME=${ZIM_HOME:-${HOME}/.local/share/zim}
+ZIM_CONFIG_FILE=${ZIM_CONFIG_FILE:-${HOME}/.config/zimrc}
+if [[ -r ${ZIM_HOME}/init.zsh ]]; then
+  source ${ZIM_HOME}/init.zsh
+elif [[ -r ${ZIM_HOME}/zimfw.zsh ]]; then
   source ${ZIM_HOME}/zimfw.zsh init
 fi
-# Initialize modules.
-source ${ZIM_HOME}/init.zsh
 
-# ------------------------------
-# Post-init module configuration
-# ------------------------------
+# ============================================================
+# fzf-tab
+# ============================================================
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':fzf-tab:*' switch-group ',' '.'
+zstyle ':fzf-tab:complete:*' fzf-preview \
+  'ls --color=always -1 --group-directories-first ${(Q)realpath} 2>/dev/null || \
+   cat ${(Q)realpath} 2>/dev/null || \
+   echo "(no preview)"'
 
-#
-# zsh-history-substring-search
-#
+# ============================================================
+# Aliases
+# ============================================================
 
-zmodload -F zsh/terminfo +p:terminfo
-# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
-for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
-for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
-for key ('k') bindkey -M vicmd ${key} history-substring-search-up
-for key ('j') bindkey -M vicmd ${key} history-substring-search-down
-unset key
-# }}} End configuration added by Zim install
+# ---- System ----
+alias ls='ls --color=auto'
+alias ll='ls -lah'
+alias la='ls -A'
+alias l='ls -lh'
+alias lt='ls -lht'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias c='clear'
+alias h='history'
+alias md='mkdir -p'
+alias cp='cp -i'
+alias mv='mv -i'
+alias svim='sudo vim'
 
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/autojump/autojump.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# ---- Git ----
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gp='git push'
+alias gpf='git push --force-with-lease'
+alias gl='git log --oneline --graph --decorate --all'
+alias gd='git diff'
+alias gds='git diff --staged'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gbr='git branch'
+alias gpl='git pull --rebase'
+alias grh='git reset HEAD~1 --soft'
+alias gst='git stash'
+alias gsta='git stash apply'
+alias gg='git grep'
 
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+# ---- Java / Maven ----
+alias mvnci='mvn clean install'
+alias mvnt='mvn test'
+alias mvnct='mvn clean test'
+alias mvnc='mvn clean'
+alias mvnp='mvn package'
+alias mvno='mvn clean install -DskipTests'
+alias mvnv='mvn -version'
+alias mvncompile='mvn compile'
 
-alias ll='ls --color=auto -lah'
-alias svim='sudo -E vim'
-alias echoPATH='echo $PATH | tr ":" "\n"'
+# ============================================================
+# Environment
+# ============================================================
 
+# ls colors (dircolors)
+if [[ -f /etc/DIR_COLORS ]] && (( $+commands[dircolors] )); then
+  eval $(dircolors -b /etc/DIR_COLORS 2>/dev/null)
+elif (( $+commands[dircolors] )); then
+  eval $(dircolors -b)
+fi
 
-
-bindkey '^q' autosuggest-accept
-
-PROMPT='%F{blue}%n@%m%f %F{green}%~%f %# '
-
-export EDITOR='vim'
-# node17+使用不支持的加密算法, 需要添加此行
-export NODE_OPTIONS=--openssl-legacy-provider
-export PATH="$PATH:$HOME/go/bin"
-
-
-
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# pnpm
-export PNPM_HOME="/home/Tomatos/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# Powerlevel10k prompt (run `p10k configure` to customize)
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# pi agent
+export PI_FFF_MODE=override
+export PATH="${HOME}/.local/share/pi-node/node-v22.23.1-linux-x64/bin:${HOME}/.pi/agent/bin:${HOME}/.local/bin:${PATH}"

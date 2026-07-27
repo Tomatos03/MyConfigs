@@ -1,0 +1,5 @@
+# 对 settings.json 应用 smudge/clean filter 以自动处理秘钥
+zed/zed_setting/settings.json filter=secret-filter
+
+# 文本文件统一使用 LF 换行符
+* text=auto eol=lf

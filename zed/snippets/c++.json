@@ -14,6 +14,23 @@
         ],
         "description": "Quick Power function with modulus"
     },
+    "Combination Function": {
+        "prefix": "comb",
+        "body": [
+            "// 逐位相乘法实现组合数计算",
+            "// 算法时间复杂度O(m)",
+            "i64 C(int n, int m) {",
+            "    if (m > n)",
+            "        return 0;",
+            "    i64 res = 1;",
+            "    for (int i = 1; i <= m; ++i) {",
+            "        res = res * (n - i + 1) / i;",
+            "    }",
+            "    return res;",
+            "}"
+        ],
+        "description": "Combination function using multiplicative formula"
+    },
     "Segment Tree Template": {
         "prefix": "segtree",
         "body": [
@@ -469,10 +486,6 @@
     "eulerSieve": {
         "prefix": "eulerSieve",
         "body": [
-            "#include <iostream>",
-            "#include <vector>",
-            "using namespace std;",
-            "",
             "vector<int> eulerSieve(int mx_v) {",
             "    vector<bool> is_prime(mx_v + 1, true);",
             "    is_prime[0] = is_prime[1] = false;",

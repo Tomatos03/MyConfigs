@@ -1,0 +1,6 @@
+# 本地秘钥文件（包含真实 API Token，绝不提交）
+.secrets
+
+# 系统文件
+.DS_Store
+Thumbs.db
